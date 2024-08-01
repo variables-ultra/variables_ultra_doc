@@ -1,22 +1,21 @@
 # Variables Ultra
 
-**Variables Ultra** is a powerful variable management plugin that implements almost all of the vanilla variable
-management functionalities in Figma, but with some differences. We have optimized it based on user feedback and added
-several premium features such as `Import/Export`, `Variable Rebinding`, and `Generating Variable Set Templates`, among
-others.
+Variables Ultra | Rebind, Import & Export Variables
+
+**Variables Ultra** is a powerful variable management plugin that implements almost all of the native variable management functionalities in Figma, but with some differences. We have optimized it based on user feedback and added several premium features such as `Import/Export`, `Variable Rebinding`, and `Generating Variable Set Templates`, among others.
 
 ## Quick Start
 
-After opening the plugin, create your variable collection.
+After opening the plugin, create your variable set.
 
 ![home](https://bppleman.blob.core.windows.net/variables-ultra/readme/home.png)
 
 - A brand new, unified UI/UX design
-- Place `Collection` in the same viewport to avoid dropdown menus, enabling quick selection
-- Click the icon button before the variable name to view/edit details
+- Place `Collections` in the same viewport to avoid dropdown menus, enabling quick selection
+- Click the icon button next to the variable name to view/edit details
 - More user-friendly options for single selection, multi-selection, and select all
-- More intuitive linking of variables (alias), making operations smoother
-- Batch modification of multiple variable's scopes
+- More intuitive linking of variables (aliases), making operations smoother
+- Batch modification of multiple variables' scopes
 
 ---
 
@@ -32,10 +31,7 @@ After opening the plugin, create your variable collection.
 
 ### Variable Rebinding
 
-***Want to switch themes?
-Modes amount limit?
-Use variable sets as your themes to quickly switch different variable
-sets for layers, making theme switch effortless.***
+***Want to switch themes? Running out of modes? Use variable sets as your themes to quickly switch different variable sets for layers, making theme changes effortless.***
 
 Follow these steps to prepare:
 
@@ -63,7 +59,7 @@ Follow these steps to prepare:
 
    ![rebind_var_05](https://bppleman.blob.core.windows.net/variables-ultra/readme/rebind_var_05.png)
 
-***This applies to any nested layers and any number of variables. For more usage, please try playground***
+***This applies to any nested layers and any number of variables.***
 
 > Please note, `Rebind Var` cannot rebind the following attributes:
 
@@ -87,8 +83,7 @@ We often need to apply variables to multiple Figma files, and manually recreatin
 
    ![import_01](https://bppleman.blob.core.windows.net/variables-ultra/readme/import_01.png)
 
-   Click the export button in the bottom right corner to generate a JSON file containing all the variable sets and
-   variables.
+   Click the export button in the bottom right corner to generate a JSON file containing all the variable sets and variables.
 
 2. Import
     1. Switch to `Import/Export` tab and select the JSON file to import.
@@ -97,9 +92,6 @@ We often need to apply variables to multiple Figma files, and manually recreatin
 
 ### Material3 Specification Templates
 
-Material3 specification templates are provided to help you quickly set up variables according to the Material3 design
-guidelines.
-
-![template_01](https://bppleman.blob.core.windows.net/variables-ultra/readme/template_01.png)
+Material3 specification templates are provided to help you quickly set up variables according to the Material3 design guidelines.
 
 ---
