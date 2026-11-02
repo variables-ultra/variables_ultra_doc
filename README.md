@@ -1,105 +1,138 @@
+<img src="logo.png" width="64" alt="Variables Ultra logo">
+
 # Variables Ultra
 
-**Variables Ultra** is a powerful variable management plugin that implements almost all of the vanilla variable
-management functionalities in Figma, but with some differences. We have optimized it based on user feedback and added
-several premium features such as `Import/Export`, `Variable Rebinding`, and `Generating Variable Set Templates`, among
-others.
+Rebind, import and export Figma variables, and generate Material 3 themes.
 
-## Quick Start
+English | [中文](README_ZH.md)
 
-After opening the plugin, create your variable collection.
+**Variables Ultra** is a free Figma plugin for working with variables. It covers most of what Figma's built-in
+variables panel does, with a layout tuned for large collections, and adds tools Figma doesn't have: rebinding layers
+from one collection to another, moving variables between files, and generating Material 3 color themes.
 
-![home](https://bppleman.blob.core.windows.net/variables-ultra/readme/home.png)
+- Every feature is free. No account or sign-in is needed.
+- Everything runs inside Figma. Exports are saved as a local file and nothing is uploaded.
 
-- A brand new, unified UI/UX design
-- Place `Collection` in the same viewport to avoid dropdown menus, enabling quick selection
-- Click the icon button before the variable name to view/edit details
-- More user-friendly options for single selection, multi-selection, and select all
-- More intuitive linking of variables (alias), making operations smoother
-- Batch modification of multiple variable's scopes
+## Contents
 
----
+- [Variables tab](#variables-tab)
+- [Rebind variables](#rebind-variables)
+- [Import and export](#import-and-export)
+- [Material 3 templates](#material-3-templates)
+- [Feedback](#feedback)
 
-## One More Thing
+## Variables tab
 
-1. [Variable Rebinding](#variable-rebinding)
-2. [Import/Export](#import-and-export)
-3. [Material3 Specification Templates](#material3-specification-templates)
+Open the plugin to browse and edit the variables in the current file.
 
-> Please note, these features require a valid subscription to unlock.
+![The Variables tab](readme/home.png)
 
----
+- All collections sit side by side in one view, so you switch between them without a dropdown.
+- Click the icon in front of a variable's name to view or edit its details.
+- Select one, several or all variables at once.
+- Link a variable to another one (an alias) in fewer steps.
+- Change the scopes of many variables in one go.
 
-### Variable Rebinding
+## Rebind variables
 
-***Want to switch themes?
-Modes amount limit?
-Use variable sets as your themes to quickly switch different variable
-sets for layers, making theme switch effortless.***
+Use whole collections as themes. Rebinding swaps every variable a layer uses from one collection to the matching
+variable in another, so switching themes doesn't depend on how many modes your Figma plan allows.
 
-Follow these steps to prepare:
+Variables are matched by **name**: `background` in the source collection is replaced by `background` in the target
+collection. Variables without a match are left as they are.
 
-1. Prepare two variable sets with different names to represent your different themes.
+### Example
 
-    1. Create a variable set `Collection A` and create a variable `background`.
+1. Create two collections with the same variable names.
+    1. Collection `Collection A` with a variable `background`.
 
-       ![rebind_var_01](https://bppleman.blob.core.windows.net/variables-ultra/readme/rebind_var_01.png)
+       ![Collection A](readme/rebind_var_01.png)
 
-    2. Create a variable set `Collection B` and create a variable `background`.
+    2. Collection `Collection B` with a variable `background`.
 
-       ![rebind_var_02](https://bppleman.blob.core.windows.net/variables-ultra/readme/rebind_var_02.png)
+       ![Collection B](readme/rebind_var_02.png)
 
-2. Select any layer and bind its Fill to a variable.
+2. Select a layer and bind its fill to `Collection A` / `background`.
 
-   ![rebind_var_03](https://bppleman.blob.core.windows.net/variables-ultra/readme/rebind_var_03.png)
+   ![A layer bound to Collection A](readme/rebind_var_03.png)
 
-3. Open the plugin and switch to the `Rebind Var` tab.
+3. Open the plugin and go to the `Rebind Var` tab.
+    - Choose the scope: `Selection`, `Current Page` or `All Pages`.
+    - Set `Source Collection` to `Collection A` and `Target Collection` to `Collection B`.
 
-   Select `Collection A` in the Source and `Collection B` in the Target.
+   ![Choosing source and target collections](readme/rebind_var_04.png)
 
-4. Ensure the red layer is selected in Figma and press the `Rebind` button.
+4. Press the rebind button at the bottom right. The layer's fill is now bound to `Collection B` / `background`.
 
-   You will see the layer's Fill rebind to `Collection B - background`.
+   ![The layer is now bound to Collection B](readme/rebind_var_05.png)
 
-   ![rebind_var_05](https://bppleman.blob.core.windows.net/variables-ultra/readme/rebind_var_05.png)
+Rebinding walks through every nested layer in the scope and handles any number of variables.
 
-***This applies to any nested layers and any number of variables. For more usage, please try playground***
+### What gets rebound
 
-> Please note, `Rebind Var` cannot rebind the following attributes:
+- Solid and gradient fills and strokes
+- Effects and layout grids
+- Layer properties bound to variables, such as size, spacing, corner radius and opacity
+- Text content, typography and fills on text ranges
+- Collections from enabled team libraries can be used as the source or target
 
-- Fill with gradient colors
-- For rich text, you can only choose one of the following:
-    - Bind `String Variable` to Text Content
-    - Bind any variable to Text Style instead of the text content itself
+### Limits
 
----
+- A fill set to `Mixed` can't be rebound.
+- If a text layer binds a string variable to its content **and** binds variables on several text ranges, only the
+  content is rebound; the per-range typography is skipped.
 
-### Import and Export
+Anything that couldn't be rebound is listed in `Conflict View`, with the page, layer, field and reason. You can copy
+the list to the clipboard.
 
-We often need to apply variables to multiple Figma files, and manually recreating them one by one can be a massive task.
+## Import and export
 
-1. We have prepared a `Shared Collection`:
-    1. `a-background` links to `Collection A - background`
-    2. `b-background` links to `Collection B - background`
-    3. `blue` is set to `#0000FF`
-    4. `blue-alias` links to `blue`
-    5. `a-background-alias` links to `a-background`
+Reuse variables across files without recreating them by hand.
 
-   ![import_01](https://bppleman.blob.core.windows.net/variables-ultra/readme/import_01.png)
+### Export
 
-   Click the export button in the bottom right corner to generate a JSON file containing all the variable sets and
-   variables.
+1. On the `Variables` tab, press the save button at the bottom right.
+2. The plugin saves `variables_data.json`, which contains every collection and variable in the file, including
+   aliases between them.
 
-2. Import
-    1. Switch to `Import/Export` tab and select the JSON file to import.
+For example, this `Shared Collection` links to variables in two other collections:
 
----
+![A collection with aliases to other collections](readme/import_01.png)
 
-### Material3 Specification Templates
+### Import
 
-Material3 specification templates are provided to help you quickly set up variables according to the Material3 design
-guidelines.
+1. Open the target file, go to the `Import Var` tab and select the JSON file.
 
-![template_01](https://bppleman.blob.core.windows.net/variables-ultra/readme/template_01.png)
+   ![Selecting the JSON file](readme/import_02.png)
 
----
+2. The plugin shows every collection in the file and how they depend on each other.
+3. Select the collections to import. Collections they depend on are selected automatically.
+
+   ![Selecting collections to import](readme/import_03.png)
+
+4. Press the import button at the bottom right.
+
+   ![Import finished](readme/import_04.png)
+
+## Material 3 templates
+
+Generate a full Material 3 color scheme from one seed color.
+
+1. Go to the `Template Var` tab and pick a seed color.
+2. Press the generate button at the bottom right and choose how to apply it:
+    - **Create**: make a new collection (the name must be unique).
+    - **Update**: update the variables that already exist in a collection you choose.
+    - **Merge**: update matching variables and add the missing ones.
+
+The generated collection has four modes: `Dark`, `Light`, `Light Medium Contrast` and `Light High Contrast`. Generate
+several collections from different seed colors, then switch between them with [Rebind variables](#rebind-variables).
+
+![Material 3 template](readme/template_01.png)
+
+## Feedback
+
+Found a bug or have an idea? [Open an issue](https://github.com/variables-ultra/variables_ultra_doc/issues).
+
+## License
+
+[MIT](LICENSE)

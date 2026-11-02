@@ -1,113 +1,133 @@
+<img src="logo.png" width="64" alt="Variables Ultra 图标">
+
 # Variables Ultra
 
-Variables Ultra | Rebind, Import & Export Variables
+重绑定、导入导出 Figma 变量，并生成 Material 3 主题。
 
-**Variables Ultra**
-是一款强大的变量管理插件，实现了几乎所有香草的变量管理的功能，但又不完全一样，我们统计了一些样本，专门针对使用体验进行了优化，同时也增加了一些付费功能: `导入/导出`、`变量重绑定`、`生成变量集模板`
-等等
+[English](README.md) | 中文
 
-## 快速开始
+**Variables Ultra** 是一款免费的 Figma 变量管理插件。它覆盖了 Figma 自带变量面板的大部分功能，界面针对变量很多的情况做了优化，
+还补上了 Figma 没有的几样工具：把图层从一个变量集整体换绑到另一个变量集、在文件之间搬运变量、生成 Material 3 配色主题。
 
-打开插件后，创建你的变量集
+- 所有功能免费，不需要注册或登录。
+- 所有操作都在 Figma 里完成。导出的文件保存在本地，不会上传到任何地方。
 
-![home](https://bppleman.blob.core.windows.net/variables-ultra/readme/home.png)
+## 目录
 
-- 全新且统一设计语言的 UI/UX
-- 将 `Collection` 放入同一视口避免使用下拉框，方便快速选择
-- 点击变量名前面的图标按钮以查看/编辑详情
-- 更人性化的单选、多选、全选
-- 更人性化的链接变量（别名），操作更流畅
-- 批量修改多个变量的可选范围
+- [变量页](#变量页)
+- [变量重绑定](#变量重绑定)
+- [导入和导出](#导入和导出)
+- [Material 3 模板](#material-3-模板)
+- [反馈](#反馈)
 
----
+## 变量页
 
-## One more thing
+打开插件就能浏览和编辑当前文件里的变量。
 
-1. [变量重绑定](#变量重绑定)
-2. [导入/导出](#导入和导出)
-3. [Material3 规范模版](#Material3规范模版)
+![变量页](readme/home.png)
 
-> 请注意，这些功能需要一个可用的订阅以解锁
+- 所有变量集并排显示在同一个视图里，切换时不用打开下拉框。
+- 点击变量名前面的图标，查看或编辑变量详情。
+- 支持单选、多选和全选。
+- 把变量链接到另一个变量（别名）的操作更少。
+- 可以一次修改多个变量的作用范围（scope）。
 
----
+## 变量重绑定
 
-### 变量重绑定
+把整个变量集当作主题来用。重绑定会把图层用到的变量，从一个变量集换成另一个变量集里对应的变量，所以切换主题不受 Figma 套餐里
+mode 数量的限制。
 
-***想要切换主题？Mode数量限制？使用变量集作为你的主题，快速为图层切换不同的变量集合，轻松实现主题替换***
+变量按**名称**匹配：源变量集里的 `background` 会换成目标变量集里的 `background`。目标变量集里找不到同名变量的，保持不变。
 
-为你的设计增加一个不同的主题风格，很简单。
+### 示例
 
-你需要按照以下步骤做一些准备：
+1. 创建两个变量名相同的变量集。
+    1. 变量集 `Collection A`，包含变量 `background`。
 
-1. 准备两个不同名称的变量集，以表示你的不同主题
+       ![Collection A](readme/rebind_var_01.png)
 
-    1. 创建变量集 `Collection A`，并创建变量 `background`
+    2. 变量集 `Collection B`，包含变量 `background`。
 
-       ![rebind_var_01](https://bppleman.blob.core.windows.net/variables-ultra/readme/rebind_var_01.png)
+       ![Collection B](readme/rebind_var_02.png)
 
-    2. 创建变量集 `Collection B`，并创建变量 `background`
+2. 选中一个图层，把它的 Fill 绑定到 `Collection A` / `background`。
 
-       ![rebind_var_02](https://bppleman.blob.core.windows.net/variables-ultra/readme/rebind_var_02.png)
+   ![绑定到 Collection A 的图层](readme/rebind_var_03.png)
 
-2. 选择任意一个图层，将它的 Fill 绑定一个变量，比如 `Collection A` - `backgroud`
+3. 打开插件，切换到 `Rebind Var` 标签页。
+    - 选择范围：`Selection`（选中的图层）、`Current Page`（当前页）或 `All Pages`（所有页）。
+    - `Source Collection` 选 `Collection A`，`Target Collection` 选 `Collection B`。
 
-   ![rebind_var_03](https://bppleman.blob.core.windows.net/variables-ultra/readme/rebind_var_03.png)
+   ![选择源和目标变量集](readme/rebind_var_04.png)
 
-3. 打开插件，切换到 `Rebind Var` 标签页
+4. 点击右下角的重绑定按钮，图层的 Fill 就换绑到了 `Collection B` / `background`。
 
-    - 在 Source Collection 中选择 `Collection A`
+   ![图层已换绑到 Collection B](readme/rebind_var_05.png)
 
-    - 在 Target Collection 中选择 `Collection B`
+重绑定会遍历范围内所有嵌套的图层，变量数量不限。
 
-      ![rebind_var_04](https://bppleman.blob.core.windows.net/variables-ultra/readme/rebind_var_04.png)
+### 支持重绑定的内容
 
-4. 确保在 figma 中已经选中了红色图层，并按下 `Rebind` 按钮
+- 纯色和渐变的填充、描边
+- 效果（Effects）和布局网格（Layout grids）
+- 绑定了变量的图层属性，比如尺寸、间距、圆角、不透明度
+- 文本内容、文字样式，以及文本片段上的填充
+- 源和目标都可以是已启用的团队库里的变量集
 
-   最终你会看到图层的 Fill ，重新绑定到 `Collection B` - `backgroud`
+### 限制
 
-   ![rebind_var_05](https://bppleman.blob.core.windows.net/variables-ultra/readme/rebind_var_05.png)
+- 值为 `Mixed` 的填充无法重绑定。
+- 如果一个文本图层既把字符串变量绑定到了文本内容，**又**在多个文本片段上分别绑定了变量，只会重绑定文本内容，各片段的文字样式会被跳过。
 
-***这适用于任意嵌套的图层，以及任意数量的变量。更多的用法请尝试playground***
+无法重绑定的内容会列在 `Conflict View` 里，包括页面、图层、属性和原因，可以一键复制到剪贴板。
 
-> 请注意，`Rebind Var` 无法对以下属性进行重新绑定
+## 导入和导出
 
-- 带有渐变颜色的 Fill
-- 对于富文本来说，你只能在以下二选一
-    - 将 `String Variable` 绑定到 Text Content
-    - 将任意变量绑定到 Text Style 而不是文本内容本身
+在多个文件之间复用变量，不用再手动一个个重建。
 
----
+### 导出
 
-### 导入和导出
+1. 在 `Variables` 标签页，点击右下角的保存按钮。
+2. 插件会保存一个 `variables_data.json`，包含当前文件里所有的变量集和变量，以及它们之间的别名关系。
 
-我们经常需要将变量应用到多个 figma 文件中，一个一个手动重建将会是一个巨大的工程
+比如下面这个 `Shared Collection` 链接了另外两个变量集里的变量：
 
-但现在有了导入/导出，只需要两个按钮就可以做到
+![带别名的变量集](readme/import_01.png)
 
-1. 我们准备了一个 `Shared Collection`
-    1. `a-background` 链接到 `Collection A` - `backgroud`
-    2. `b-background` 链接到 `Collection B` - `backgroud`
-    3. `blue` 设置为 `#0000FF`
-    4. `blue-alias` 链接到 `blue`
-    5. `a-background-alias` 链接到 `a-background`
+### 导入
 
-   ![import_01](https://bppleman.blob.core.windows.net/variables-ultra/readme/import_01.png)
+1. 打开目标文件，切换到 `Import Var` 标签页，选择刚才导出的 JSON 文件。
 
-   点击右下角的导出按钮，将会生成一个 json 文件，包含了所有的变量集和变量
+   ![选择 JSON 文件](readme/import_02.png)
 
-2. 导入
-    1. 切换到 `Import Var` 标签页，并选择刚才导出的 json 文件
-       ![import_02](https://bppleman.blob.core.windows.net/variables-ultra/readme/import_02.png)
-    2. 正如我们刚才导出的一样，你会看到所有的变量集和它们的依赖关系
-    3. 选择需要导入的变量集，对于有依赖关系的变量集，插件会自动导入依赖的变量集
-       ![import_03](https://bppleman.blob.core.windows.net/variables-ultra/readme/import_03.png)
-    4. 点击导入按钮，完成操作
-       ![import_04](https://bppleman.blob.core.windows.net/variables-ultra/readme/import_04.png)
+2. 插件会列出文件里所有的变量集，以及它们之间的依赖关系。
+3. 勾选要导入的变量集，它们依赖的变量集会被自动勾选。
 
-### Material3规范模版
+   ![勾选要导入的变量集](readme/import_03.png)
 
-只需要选择一个种子色，即可生成一个 Material3 规范的变量集
+4. 点击右下角的导入按钮。
 
-生成多个变量集，即可使用 `Rebind Var` 功能，快速切换主题
+   ![导入完成](readme/import_04.png)
 
-![template_01](https://bppleman.blob.core.windows.net/variables-ultra/readme/template_01.png)
+## Material 3 模板
+
+选一个种子色，生成一整套 Material 3 配色。
+
+1. 切换到 `Template Var` 标签页，选择种子色。
+2. 点击右下角的生成按钮，选择生成方式：
+    - **Create**：新建一个变量集，名称不能和已有的重复。
+    - **Update**：只更新所选变量集里已有的同名变量。
+    - **Merge**：更新同名变量，并补上缺少的变量。
+
+生成的变量集包含四个 mode：`Dark`、`Light`、`Light Medium Contrast` 和 `Light High Contrast`。用不同的种子色生成多个变量集，
+再用[变量重绑定](#变量重绑定)在它们之间切换。
+
+![Material 3 模板](readme/template_01.png)
+
+## 反馈
+
+发现问题或有建议？欢迎[提交 issue](https://github.com/variables-ultra/variables_ultra_doc/issues)。
+
+## 许可证
+
+[MIT](LICENSE)
